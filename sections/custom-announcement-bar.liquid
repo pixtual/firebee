@@ -1,0 +1,84 @@
+<section class="announcement-bar">
+        <a href="{{ section.settings.link }}" class="announcement-link">
+            <span class="announcement-text">
+              {% comment %} {{section.settings.offer_text}} {% endcomment %}
+              Black Friday Sale <span>-</span> Save $100
+              </span>
+        </a>
+</section>
+
+{%  style  %} 
+
+.announcement-bar {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.announcement-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.announcement-bar { 
+  background-size: cover;
+  min-height: 74px; 
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .announcement-bar {
+        background-image: url('{{ section.settings.mobile_image | image_url : width: 500 }}'); /* Mobile background image */
+    }
+}
+
+/* Desktop-specific styles */
+@media (min-width: 769px) {
+    .announcement-bar {
+        background-image: url('{{ section.settings.desktop_image | image_url : width: 1200 }}'); /* Desktop background image */
+    }
+}
+
+{% endstyle %} 
+
+
+{% schema %}
+    {
+      "name": "custom annoucmenet bar",
+      "tag": "header",
+      "class": "custom-annoucement-bar",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Desktop Image",
+          "id": "desktop_image"
+        },
+        {
+          "type": "image_picker",
+          "label": "mobile image",
+          "id": "mobile_image"
+        },
+        {
+          "type": "url",
+          "label": "link",
+          "id": "link"
+        },
+        {
+          "type": "text",
+          "label": "offer text",
+          "id": "offer_text"
+        }
+      ],
+      "blocks": [],
+      "presets": [
+        {
+          "name": "custom announcement"
+        }
+      ]
+    }
+    {% endschema %}
